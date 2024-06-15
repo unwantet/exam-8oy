@@ -30,12 +30,8 @@ export default function Register() {
         console.log(userSignup);
       }, [userSignup]);
   return (
-    <>
+    <div className="background-vid">
       <div className="max-w-[400px] mx-auto min-h-screen  grid place-items-center ">
-        <video autoPlay muted loop className="background-video">
-          <source src="/public/register.mp4" type="video/mp4" />
-          Sizning brauzeringiz video formatini qo'llab-quvvatlamaydi.
-        </video>
         <div className="">
           <Form method="post" className="form">
             <div className="title">
@@ -109,6 +105,6 @@ export default function Register() {
           </Form>
         </div>
       </div>
-    </>
+    </div>
   );
 }
