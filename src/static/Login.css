@@ -1,14 +1,16 @@
 
 
 .background-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1;
-  }
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-image: url('https://media.giphy.com/media/ge8f4At0BejIh0eiOT/giphy.gif');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
   
   .form {
     --input-focus: #2d8cf0;

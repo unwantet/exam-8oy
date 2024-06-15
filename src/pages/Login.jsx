@@ -32,15 +32,9 @@ export default function Login() {
 
 
   return (
-    <>
+    <div className="background-video">
       <div className="max-w-[400px] mx-auto min-h-screen  grid place-items-center ">
-        <video autoPlay muted loop className="background-video">
-          <source
-            src="/public/login-bg.mp4"
-            type="video/mp4"
-          />
-          Sizning brauzeringiz video formatini qo'llab-quvvatlamaydi.
-        </video>
+        
         <div className="">
           <Form method="post" className="form">
             <div className="title">
@@ -102,6 +96,6 @@ export default function Login() {
           </Form>
         </div>
       </div>
-    </>
+    </div>
   );
 }
