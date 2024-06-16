@@ -8,7 +8,7 @@ import { GlobalContext } from "../context/useContextGlobal";
 
 function Create() {
   const { user } = useContext(GlobalContext);
-  const [category,setCategory] = useS
+  const [category,setCategory] = useState("")
   const [ingrediend, setIngrediend] = useState("");
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -62,11 +62,13 @@ function Create() {
       description.trim() !== "" &&
       imgs.length > 0 &&
       cookingTime.trim() !== "" &&
+      category.trim() !== "" &&
       ingerediends.length > 0
     ) {
       const newRetsept = {
         name,
         description,
+        category,
         img: imgs,
         cockingTime: cookingTime,
         ingrediends: ingerediends,
@@ -136,9 +138,9 @@ function Create() {
                   type="text"
                   required
                   onChange={(e) => setCategory(e.target.value)}
-                  value={name}
+                  value={category}
                 />
-                <label className="textUser">Name of Fast food</label>
+                <label className="textUser">Category of your Food</label>
               </div>
             </div>
           </label>
