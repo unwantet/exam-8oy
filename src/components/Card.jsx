@@ -1,7 +1,10 @@
 import "../static/card.css";
 
-import { collection, deleteDoc, doc } from 'firebase/firestore';
+import { deleteDoc, doc } from 'firebase/firestore';
+import { db } from '../firebase/firebaseConfig'
 import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
+
 
 export default function Card({ product }) {
     const navigate = useNavigate();
@@ -9,9 +12,9 @@ export default function Card({ product }) {
 
   const handleDelete = async () => {
     try {
-        // await deleteDoc(doc(db, "eda", String(product.id))); // Ensure id is a string
+        await deleteDoc(doc(db, "eda", String(product.id))); // Ensure id is a string
         console.log(product.id);
-        alert("Task deleted successfully");
+        toast.success("Task deleted successfully");
     } catch (error) {
         console.error("Error deleting document: ", error);
     }
@@ -69,6 +72,7 @@ const navigateLink = () => {
           </div>
         </div>
       </div>
+      <Toaster/>
       <div class="bottom-section cursor-pointer" onClick={navigateLink}>
         <span class="title">{product.name}</span>
         <div class="row row1">

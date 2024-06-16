@@ -35,6 +35,10 @@ import { auth } from "./firebase/firebaseConfig";
 import {action as signupAction} from './pages/Register'
 import {action as signinAction} from './pages/Login'
 
+//loader
+import { loader as singleLoader } from "./pages/Single";
+
+
 export default function App() {
 
   const {user , dispatch , authChange} = useContext(GlobalContext);
@@ -67,6 +71,7 @@ export default function App() {
         {
           path: "/single/:id",
           element: <Single/>,
+          loader: singleLoader
         },
       ],
     },
