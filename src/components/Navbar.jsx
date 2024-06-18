@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { GlobalContext } from "../context/useContextGlobal";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase/firebaseConfig";
+import toast, { Toaster } from "react-hot-toast";
+
 import {
   clearCart,
   editItem,
@@ -17,6 +19,11 @@ const Navbar = () => {
   const cartTotal = useSelector((state) => state.cart.cartTotal);
   const numItemsInCart = useSelector((state) => state.cart.numItemsInCart);
   const { user } = useContext(GlobalContext);
+  useEffect(() => {
+    
+    toast.success(`Welcome ${user.displayName}`)
+  }, [])
+  
 
   useEffect(() => {
     dispatch(updateFromLocalStorage());
@@ -38,6 +45,7 @@ const Navbar = () => {
         <div className="navbar-start gap-4">
           <div className="dropdown flex items-center gap-5">
             <label tabIndex="0" className="btn btn-ghost btn-circle">
+            <Toaster />
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"

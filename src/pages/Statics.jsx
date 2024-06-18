@@ -14,11 +14,15 @@ export default function Statics() {
         console.log("Fetched data:", data);
     }, [data]);
 
-    let categories = [];
+    let names = [];
+    let prices = [];
+    let cockingTimes = [];
 
     if (data && data.length > 0) {
         data.forEach((item) => {
-            categories.push(item.category);
+            names.push(item.name);
+            prices.push(item.price);
+            cockingTimes.push(item.cockingTime);
         });
     }
 
@@ -28,9 +32,9 @@ export default function Statics() {
             <UserStats user={user} />
             <h1 className="text-5xl font-bold text-center text-warning">Statics of Foods </h1>
             <div className="">
-                <h1>Foods price stats</h1>
-                <BarChart data={data} />
-                <BarChartCus categories={categories} />
+                <h1>Foods Cocking Times stats</h1>
+                <BarChart cockingTimes={cockingTimes} names={names}/>
+                <BarChartCus names={names} prices={prices} />
             </div>
         </div>
     );

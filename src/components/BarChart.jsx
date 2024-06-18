@@ -4,24 +4,14 @@
       class BarChart extends React.Component {
         constructor(props) {
           super(props);
+          const cockingTimes = this.props.cockingTimes
+          const names = this.props.names
+          console.log(names,cockingTimes);
 
-          const { data } = this.props;
-          console.log(data);
-          let names = [];
-          let prices = [];
-      
-          if (data && data.length > 0) {
-              data.forEach((item) => {
-                  names.push(item.name);
-                  prices.push(item.price);
-              });
-          }
-
-          console.log(names,prices);
           this.state = {
           
             series: [{
-              data: [...prices]
+              data: [...cockingTimes]
             }],
             options: {
               chart: {

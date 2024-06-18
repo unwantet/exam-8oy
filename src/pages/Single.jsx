@@ -25,8 +25,6 @@ export const loader = async ({ params }) => {
   return null;
 };
 
-
-
 const Single = () => {
   const data = useLoaderData();
   const product = data;

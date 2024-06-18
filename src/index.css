@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 
+
+    
+
 @layer components{
     .align-content{
         @apply mx-auto max-w-[1400px] p-0
