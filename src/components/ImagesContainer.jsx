@@ -28,14 +28,14 @@ const ImagesContainer = ({product}) => {
   };
 
   return (
-    <div>
+    <div className='max-w-[542px]'>
         <div className='flex gap-8'>
 
       {
           images.map((image, index) => (
               <img
               key={index}
-              className="w-full max-h-[110px] rounded-lg cursor-pointer hover:opacity-40 transition-all duration-300 object-contain"
+              className="w-full max-h-[100px] rounded-lg cursor-pointer hover:opacity-40 transition-all duration-300 object-contain"
               src={image}
               alt="Product"
               onClick={openModal}

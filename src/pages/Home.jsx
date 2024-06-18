@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 export default function Home() {
     const { user } = useContext(GlobalContext);
     const { data } = useCollection("eda", ["uid", "==", user.uid]);
+    console.log(data);
 
 
      

@@ -3,13 +3,14 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import ProductCard from "../components/ProductCard";
-import { addItem } from "../../src/features/CartSlice";
+import { addItem } from "../features/cart/CartSlice";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import ImagesContainer from "../components/ImagesContainer";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../src/firebase/firebaseConfig";
 import { useLoaderData } from "react-router-dom";
 import "../static/single.css";
+import ApexCharts from "../components/Pirchart";
 
 export const loader = async ({ params }) => {
   const docRef = doc(db, "eda", params.id);
@@ -24,14 +25,18 @@ export const loader = async ({ params }) => {
   return null;
 };
 
+
+
 const Single = () => {
   const data = useLoaderData();
   const product = data;
+  console.log(product);
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
 
   const handleAddToCart = () => {
     dispatch(addItem({ product: { ...product, amount: quantity } }));
+    console.log({ product: { ...product, amount: quantity } });
   };
 
   const handleIncrement = () => {
@@ -46,16 +51,23 @@ const Single = () => {
 
   return (
     <div className="container mx-auto mt-10 p-4 max-w-[1110px]">
-      <div className="flex md:flex-wrap">
+      <div className="flex flex-wrap">
         <div className="w-1/2">
-          <img src={product.img[0]} alt="" className="w-full rounded-xl" />
+          <img
+            src={product.img[0]}
+            alt=""
+            className="min-w-[542px] rounded-xl imgman"
+          />
           <div className="flex gap-8 mt-8">
             <ImagesContainer product={product} />
+          </div>
+          <div className="mt-10">
+            <ApexCharts titles={product.ingrediends} />
           </div>
         </div>
         <div className="max-w-[445px] h-[426px] mx-auto mt-16 ">
           <ProductCard product={product} />
-          <div className="mt-16 flex items-center gap-4">
+          <div className="mt-10  flex items-center gap-4 ">
             <div className="flex items-center border rounded-lg bg-base-300 btn btn-md">
               <button
                 className="w-8 h-8 leading-10 text-gray-600 transition hover:opacity-75 text-orange-600 font-extrabold text-2xl"
