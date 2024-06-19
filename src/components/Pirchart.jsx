@@ -4,7 +4,7 @@
       class ApexChart extends React.Component {
         constructor(props) {
           super(props);
-          console.log(this.props.titles);
+          // console.log(this.props.titles);
           let series = [];
           for (let i = 0; i < this.props.titles.length; i++) {
             let num = Math.floor(Math.random() * 100);

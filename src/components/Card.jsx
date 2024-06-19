@@ -13,7 +13,7 @@ export default function Card({ product }) {
   const handleDelete = async () => {
     try {
         await deleteDoc(doc(db, "eda", String(product.id))); // Ensure id is a string
-        console.log(product.id);
+        // console.log(product.id);
         toast.success("Task deleted successfully");
     } catch (error) {
         console.error("Error deleting document: ", error);

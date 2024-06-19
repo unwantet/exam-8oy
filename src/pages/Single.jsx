@@ -8,7 +8,7 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 import ImagesContainer from "../components/ImagesContainer";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../src/firebase/firebaseConfig";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useParams } from "react-router-dom";
 import "../static/single.css";
 import ApexCharts from "../components/Pirchart";
 
@@ -26,6 +26,7 @@ export const loader = async ({ params }) => {
 };
 
 const Single = () => {
+  const {id:customID} = useParams()
   const data = useLoaderData();
   const product = data;
   console.log(product);
@@ -33,8 +34,8 @@ const Single = () => {
   const dispatch = useDispatch();
 
   const handleAddToCart = () => {
-    dispatch(addItem({ product: { ...product, amount: quantity } }));
-    console.log({ product: { ...product, amount: quantity } });
+    dispatch(addItem({ product: { ...product, amount: quantity , customID } }));
+    // console.log({ product: { ...product, amount: quantity } });
   };
 
   const handleIncrement = () => {

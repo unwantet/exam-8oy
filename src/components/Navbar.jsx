@@ -15,15 +15,13 @@ import {
 const Navbar = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
-  console.log(cartItems);
+  // console.log(cartItems);
   const cartTotal = useSelector((state) => state.cart.cartTotal);
   const numItemsInCart = useSelector((state) => state.cart.numItemsInCart);
   const { user } = useContext(GlobalContext);
   useEffect(() => {
-    
-    toast.success(`Welcome ${user.displayName}`)
-  }, [])
-  
+    toast.success(`Welcome ${user.displayName}`);
+  }, []);
 
   useEffect(() => {
     dispatch(updateFromLocalStorage());
@@ -45,7 +43,7 @@ const Navbar = () => {
         <div className="navbar-start gap-4">
           <div className="dropdown flex items-center gap-5">
             <label tabIndex="0" className="btn btn-ghost btn-circle">
-            <Toaster />
+              <Toaster />
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -284,7 +282,6 @@ const Navbar = () => {
                             -
                           </span>
                         </button>
-
                         <input
                           type="text"
                           value={item.amount}
