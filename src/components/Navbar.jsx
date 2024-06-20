@@ -5,6 +5,9 @@ import { GlobalContext } from "../context/useContextGlobal";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase/firebaseConfig";
 import toast, { Toaster } from "react-hot-toast";
+import "../static/button.css";
+import { FaShopify } from "react-icons/fa6";
+
 
 import {
   clearCart,
@@ -253,7 +256,7 @@ const Navbar = () => {
                 {cartTotal !== 0 ? (
                   cartItems.map((item) => (
                     <div
-                      key={item.id}
+                      key={item.customID} // Yangi `customID` ni `key` sifatida ishlatish
                       className="flex justify-between items-center mb-6"
                     >
                       <div className="flex gap-4 items-center">
@@ -273,7 +276,10 @@ const Navbar = () => {
                         <button
                           onClick={() =>
                             dispatch(
-                              editItem({ id: item.id, amount: item.amount - 1 })
+                              editItem({
+                                id: item.customID,
+                                amount: item.amount - 1,
+                              })
                             )
                           }
                           className="text-center border-none bg-base-300 font-extrabold hover:opacity-65 w-8 h-8"
@@ -282,6 +288,7 @@ const Navbar = () => {
                             -
                           </span>
                         </button>
+
                         <input
                           type="text"
                           value={item.amount}
@@ -291,7 +298,10 @@ const Navbar = () => {
                         <button
                           onClick={() =>
                             dispatch(
-                              editItem({ id: item.id, amount: item.amount + 1 })
+                              editItem({
+                                id: item.customID,
+                                amount: item.amount + 1,
+                              })
                             )
                           }
                           className="text-center border-none bg-base-300 font-extrabold hover:opacity-65 w-8 h-8"
@@ -316,11 +326,11 @@ const Navbar = () => {
                       <span>TOTAL</span>
                       <span className="font-bold">$ {cartTotal}</span>
                     </p>
-                    <Link
-                      to="/checkout"
-                      className="bg-orange hover:bg-hoverOrange btn rounded-none w-full border-0 text-white font-semibold text-xs"
-                    >
-                      CHECKOUT
+                    <Link to="/cart">
+                      <button className="hoverBtn">
+                        <span className="text font-bold text-2xl"> Cart</span>
+                        <span>To Checkout</span>
+                      </button>
                     </Link>
                   </div>
                 ) : (

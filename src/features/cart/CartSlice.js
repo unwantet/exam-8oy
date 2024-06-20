@@ -15,32 +15,42 @@ const cartSlice = createSlice({
   reducers: {
     addItem: (state, { payload }) => {
       const { product } = payload;
+      
+      // Mahsulotni mavjudligini tekshirish
       const existingProduct = state.cartItems.find((item) => item.customID === product.customID);
-
+    
+      // Agar mahsulot mavjud bo'lsa, miqdorni oshirish
       if (existingProduct) {
         existingProduct.amount += product.amount;
       } else {
-        state.cartItems.push(product);
+        // Mahsulotni yangi id bilan ro'yxatga qo'shish
+        state.cartItems.push({ ...product, customID: product.customID });
       }
-
+    
+      // Umumiy miqdor va jami summani yangilash
       state.numItemsInCart += product.amount;
       state.cartTotal += product.price * product.amount;
+      
+      // Yangi umumiy hisob-kitoblarni hisoblash
       cartSlice.caseReducers.calculateTotals(state);
+      localStorage.setItem("cart", JSON.stringify(state));
     },
+    
     clearCart: (state) => {
       return defaultState;
     },
     removeItem: (state, { payload }) => {
       const { id } = payload;
-      const product = state.cartItems.find((item) => item.id === id);
-      state.cartItems = state.cartItems.filter((item) => item.id !== id);
+      const product = state.cartItems.find((item) => item.customID === id);
+      state.cartItems = state.cartItems.filter((item) => item.customID !== id);
 
       state.numItemsInCart -= product.amount;
       cartSlice.caseReducers.calculateTotals(state);
     },
     editItem: (state, { payload }) => {
       const { id, amount } = payload;
-      const item = state.cartItems.find((item) => item.id === id);
+      const item = state.cartItems.find((item) => item.customID === id); // `id` o'rniga `customID` ishlatish
+    
       if (item) {
         state.numItemsInCart += amount - item.amount;
         state.cartTotal += item.price * (amount - item.amount);

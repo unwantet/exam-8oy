@@ -1,55 +1,51 @@
-        import React from "react";
-        import ReactApexChart from "react-apexcharts";
+import React, { useState, useEffect } from "react";
+import ReactApexChart from "react-apexcharts";
 
-      class BarChart extends React.Component {
-        constructor(props) {
-          super(props);
-          const cockingTimes = this.props.cockingTimes
-          const names = this.props.names
-          console.log(names,cockingTimes);
-
-          this.state = {
-          
-            series: [{
-              data: [...cockingTimes]
-            }],
-            options: {
-              chart: {
-                type: 'bar',
-                height: 350
-              },
-              plotOptions: {
-                bar: {
-                  borderRadius: 4,
-                  borderRadiusApplication: 'end',
-                  horizontal: true,
-                }
-              },
-              dataLabels: {
-                enabled: false
-              },
-              xaxis: {
-                categories: [...names],
-              }
-            },
-          
-          
-          };
+const BarChart = ({ cockingTimes, names }) => {
+  const [chartOptions, setChartOptions] = useState({
+    series: [{ data: [] }],
+    options: {
+      chart: {
+        type: 'bar',
+        height: 350
+      },
+      plotOptions: {
+        bar: {
+          borderRadius: 4,
+          borderRadiusApplication: 'end',
+          horizontal: true,
         }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      xaxis: {
+        categories: []
+      }
+    }
+  });
 
-      
-
-        render() {
-          return (
-            <div>
-              <div id="chart">
-                <ReactApexChart options={this.state.options} series={this.state.series} type="bar" height={350} />
-              </div>
-              <div id="html-dist"></div>
-            </div>
-          );
+  useEffect(() => {
+    setChartOptions((prevState) => ({
+      ...prevState,
+      series: [{ data: [...cockingTimes] }],
+      options: {
+        ...prevState.options,
+        xaxis: {
+          categories: [...names]
         }
       }
+    }));
+  }, [cockingTimes, names]);
 
+  return (
+    <div>
+      <div id="chart">
+        <ReactApexChart options={chartOptions.options} series={chartOptions.series} type="bar" height={350} />
+      </div>
+      <div id="html-dist"></div>
+    </div>
+  );
+};
 
-      export default BarChart
+export default BarChart;
