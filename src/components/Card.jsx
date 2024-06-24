@@ -10,13 +10,15 @@ export default function Card({ product }) {
   console.log(product);
   console.log(product.id);
   const handleDelete = async () => {
+    if (confirm("Are you sure you want to delete this recipe?")) {
     try {
       await deleteDoc(doc(db, "eda", String(product.id))); // Ensure id is a string
       // console.log(product.id);
-      toast.success("Task deleted successfully");
+      toast.success("Card deleted successfully");
     } catch (error) {
       console.error("Error deleting document: ", error);
     }
+  }
   };
 
   const navigateLink = () => {
